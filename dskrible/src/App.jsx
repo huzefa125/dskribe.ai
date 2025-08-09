@@ -5,7 +5,12 @@ import Problem from './components/Problem'
 import Brain from './components/Brain'
 import Clinical from './components/Clinical'
 import Designed from './components/Designed'
-
+import Alongside from './components/AlongSide'
+import Therapeutic from './components/Therapeutic'
+import Clinician from './components/Clinician'
+import Pricing from './components/Pricing'
+import CTA from './components/CTA'
+import Footer from './components/Footer'
 function App() {
   return (
     <>
@@ -14,7 +19,14 @@ function App() {
       <Problem />
       <Brain />
       <Clinical />
-      <Designed />    </>
+      <Designed /> 
+      <Alongside /> 
+      <Therapeutic /> 
+      <Clinician />
+      <Pricing />
+      <CTA />
+      <Footer />
+       </>
   )
 }
 

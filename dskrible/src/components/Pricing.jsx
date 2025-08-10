@@ -1,4 +1,5 @@
-// src/components/Pricing.jsx
+import { useState } from "react";
+
 const features = {
   starter: [
     "Up to 50 sessions per month",
@@ -33,12 +34,17 @@ function PlanCard({
   features,
   highlight = false,
   darkCTA = false,
+  onClick,
 }) {
   return (
     <div
+      onClick={onClick}
       className={[
-        "relative flex w-full max-w-sm flex-col rounded-2xl border bg-white px-8 pb-8 pt-10 shadow-sm",
-        highlight ? "border-[#2F6BFF] ring-1 ring-[#2F6BFF]/30" : "border-gray-200",
+        "relative flex w-full max-w-sm flex-col rounded-2xl border bg-white px-8 pb-8 pt-10 shadow-sm cursor-pointer",
+        "transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:-translate-y-1",
+        highlight
+          ? "border-[#2F6BFF] ring-1 ring-[#2F6BFF]/30 shadow-md"
+          : "border-gray-200",
       ].join(" ")}
     >
       {highlight && (
@@ -83,6 +89,8 @@ function PlanCard({
 }
 
 export default function Pricing() {
+  const [selectedPlan, setSelectedPlan] = useState("team");
+
   return (
     <section className="w-full bg-white">
       <div className="mx-auto max-w-6xl px-6 pt-14 text-center">
@@ -101,6 +109,8 @@ export default function Pricing() {
           priceLabel="Affordable"
           ctaLabel="Coming Soon"
           features={features.starter}
+          highlight={selectedPlan === "starter"}
+          onClick={() => setSelectedPlan("starter")}
         />
 
         <PlanCard
@@ -109,7 +119,8 @@ export default function Pricing() {
           priceLabel="Scalable"
           ctaLabel="Coming Soon"
           features={features.team}
-          highlight
+          highlight={selectedPlan === "team"}
+          onClick={() => setSelectedPlan("team")}
         />
 
         <PlanCard
@@ -119,6 +130,8 @@ export default function Pricing() {
           ctaLabel="Contact Sales"
           features={features.enterprise}
           darkCTA
+          highlight={selectedPlan === "enterprise"}
+          onClick={() => setSelectedPlan("enterprise")}
         />
       </div>
 

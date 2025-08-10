@@ -92,7 +92,7 @@ export default function Alongside() {
                 </div>
 
                 {/* Icon circle */}
-                <div className="mx-auto mb-[36px] w-[72px] h-[72px] rounded-full bg-white flex items-center justify-center border-5 border-[#BFDBFE] shadow-[0_4px_24px_0_rgba(59,130,246,0.15)]">
+                <div className="mx-auto mb-[36px] w-[72px] h-[72px] rounded-full bg-white flex items-center justify-center border-2 border-[#BFDBFE] shadow-[0_4px_24px_0_rgba(59,130,246,0.15)]">
                   {step.icon}
                 </div>
 

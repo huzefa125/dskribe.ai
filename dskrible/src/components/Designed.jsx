@@ -1,16 +1,39 @@
 import React from "react";
+import { motion } from "framer-motion";
 
+// Animation Variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const containerStagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+// Card Component
 const Card = ({ bgColor, icon, title, description }) => {
   return (
-    <div
+    <motion.div
       className={`${bgColor} rounded-3xl shadow-lg p-6 h-72 flex flex-col hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer`}
+      variants={cardVariant}
     >
       <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-4">
         {icon}
       </div>
       <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
       <p className="text-gray-700 text-sm leading-snug">{description}</p>
-    </div>
+    </motion.div>
   );
 };
 
@@ -18,18 +41,31 @@ const Designed = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
         {/* Heading */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Designed for where it hurts most
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Built for the real people doing the hardest work in healthcare
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerStagger}
+        >
           <Card
             bgColor="bg-[#CFE8FF]"
             icon={
@@ -82,7 +118,7 @@ const Designed = () => {
             title="Clinical Director"
             description="Wants scalable oversight, not more meetings. Seeking efficient ways to ensure quality across multiple providers."
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

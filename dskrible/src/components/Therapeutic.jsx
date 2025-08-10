@@ -1,11 +1,13 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const settings = [
   {
     id: 'schools',
     iconBg: '#10B981',
     title: 'School-Based Therapy',
-    description: "Supporting K-12 therapists with IEP documentation, behavioral intervention tracking, and crisis response notes.",
+    description:
+      'Supporting K-12 therapists with IEP documentation, behavioral intervention tracking, and crisis response notes.',
     bullets: [
       'IEP-compliant documentation',
       'Behavioral data tracking',
@@ -16,7 +18,8 @@ const settings = [
     id: 'college',
     iconBg: '#6366F1',
     title: 'College Counseling Centers',
-    description: 'Streamlining intake processes, crisis interventions, and referral documentation for campus mental health.',
+    description:
+      'Streamlining intake processes, crisis interventions, and referral documentation for campus mental health.',
     bullets: [
       'Crisis assessment protocols',
       'Referral tracking',
@@ -27,7 +30,8 @@ const settings = [
     id: 'private',
     iconBg: '#A855F7',
     title: 'Private Practice',
-    description: 'Enhancing solo and group practices with efficient documentation, billing support, and treatment planning.',
+    description:
+      'Enhancing solo and group practices with efficient documentation, billing support, and treatment planning.',
     bullets: [
       'Treatment plan automation',
       'Progress note generation',
@@ -38,7 +42,8 @@ const settings = [
     id: 'community',
     iconBg: '#14B8A6',
     title: 'Community Mental Health',
-    description: 'Supporting high-volume community centers with standardized documentation and outcome tracking.',
+    description:
+      'Supporting high-volume community centers with standardized documentation and outcome tracking.',
     bullets: [
       'Outcome measurement',
       'Case management notes',
@@ -49,7 +54,8 @@ const settings = [
     id: 'telehealth',
     iconBg: '#F59E0B',
     title: 'Telehealth Providers',
-    description: 'Supporting clinical training programs with structured supervision notes and learning objectives.',
+    description:
+      'Supporting clinical training programs with structured supervision notes and learning objectives.',
     bullets: [
       'Virtual session notes',
       'Technology barrier tracking',
@@ -75,9 +81,13 @@ export default function TherapeuticSettings() {
       {/* Top: Title */}
       <div className="px-[20px] md:px-[32px]">
         <div className="max-w-[1120px] mx-auto pt-[56px] md:pt-[72px]">
-          {/* Logo (replace src) */}
+          {/* Logo */}
           <div className="flex justify-center mb-[16px]">
-            <img src="/logo.svg" alt="dSkribe.ai" className="h-[28px] md:h-[34px] w-auto" />
+            <img
+              src="/logo.svg"
+              alt="dSkribe.ai"
+              className="h-[28px] md:h-[34px] w-auto"
+            />
           </div>
 
           <h2 className="text-center text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] font-bold text-[#0F172A]">
@@ -93,9 +103,16 @@ export default function TherapeuticSettings() {
       <div className="px-[20px] md:px-[32px] pb-[48px] md:pb-[64px]">
         <div className="max-w-[1120px] mx-auto mt-[28px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[20px]">
           {settings.map((s, idx) => (
-            <article
+            <motion.article
               key={s.id}
-              className="relative rounded-[16px] border border-[#E2E8F0] bg-white shadow-[0_6px_18px_rgba(2,6,23,0.05)] p-[20px] md:p-[22px]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: idx * 0.1,
+                ease: 'easeOut',
+              }}
+              className="relative rounded-[16px] border border-[#E2E8F0] bg-white shadow-[0_6px_18px_rgba(2,6,23,0.05)] p-[20px] md:p-[22px] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
             >
               {/* Icon */}
               <div
@@ -110,7 +127,7 @@ export default function TherapeuticSettings() {
                 {s.title}
               </h3>
 
-              {/* Description (added) */}
+              {/* Description */}
               <p className="mt-[6px] text-[14px] md:text-[15px] leading-[22px] text-[#64748B]">
                 {s.description}
               </p>
@@ -124,9 +141,7 @@ export default function TherapeuticSettings() {
                   </li>
                 ))}
               </ul>
-
-           
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>
@@ -157,7 +172,7 @@ export default function TherapeuticSettings() {
       <div className="mt-[18px] grid grid-cols-1 md:grid-cols-2 gap-[14px] lg:mr-25 lg:ml-25">
         <div className="rounded-[12px] border border-[#E2E8F0] p-[16px] md:p-[18px] bg-white">
           <h4 className="text-[#0F172A] text-[16px] md:text-[17px] font-semibold">
-            Evidence‑Based Documentation
+            Evidence-Based Documentation
           </h4>
           <p className="mt-[6px] text-[#475569] text-[14px] leading-[22px]">
             Templates and suggestions grounded in current best practices and regulatory requirements for each setting.
@@ -165,7 +180,7 @@ export default function TherapeuticSettings() {
         </div>
         <div className="rounded-[12px] border border-[#E2E8F0] p-[16px] md:p-[18px] bg-white">
           <h4 className="text-[#0F172A] text-[16px] md:text-[17px] font-semibold">
-            HIPAA‑Compliant by Design
+            HIPAA-Compliant by Design
           </h4>
           <p className="mt-[6px] text-[#475569] text-[14px] leading-[22px]">
             Privacy and security at the core, ensuring your documentation meets standards across settings.

@@ -1,7 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleJoinWaitlist = () => {
+    navigate('/contact');
+  };
   return (
     <section
       className="min-h-screen flex items-center justify-center px-4 sm:px-8 py-16"
@@ -45,6 +51,7 @@ const HeroSection = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleJoinWaitlist}
               className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-2 rounded-full transition-colors duration-200"
             >
               Join Waitlist

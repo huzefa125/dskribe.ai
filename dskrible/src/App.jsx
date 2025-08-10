@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 // Components
 import Navbar from './components/Navbar';
@@ -36,9 +36,12 @@ function Home() {
 }
 
 function App() {
+  const location = useLocation();
+  const isContactPage = location.pathname === '/contact';
+
   return (
     <>
-      <Navbar />
+      {!isContactPage && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />

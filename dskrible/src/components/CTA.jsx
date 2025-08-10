@@ -1,5 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 // src/components/TrialCTA.jsx
 export default function TrialCTA() {
+  const navigate = useNavigate();
+
+  const handleJoinWaitlist = () => {
+    navigate('/contact');
+  };
+
   return (
     <section
       className="mt-10 w-full"
@@ -17,7 +25,10 @@ export default function TrialCTA() {
         </p>
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <button className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#2F6BFF] shadow-sm hover:bg-white/90">
+          <button 
+            onClick={handleJoinWaitlist}
+            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#2F6BFF] shadow-sm hover:bg-white/90"
+          >
             Join Waitlist
           </button>
           <button className="rounded-full bg-white/30 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/40">

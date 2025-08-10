@@ -1,116 +1,201 @@
-    <header className="text-center mt-6 mb-10">
-      <h1 className="text-4xl font-semibold text-slate-900">Let&apos;s Connect</h1>
-      <p className="mt-3 text-slate-600">
-        Have questions, feedback, or want to join our clinical network? Reach out below.
-      </p>
-    </header>
+import React, { useState } from "react";
 
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Left: Form */}
-      <div className="lg:col-span-2">
-        <div className="rounded-2xl bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)] p-5 sm:p-6">
-          <InfoBanner />
-          <form onSubmit={onSubmit} className="mt-5 space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700">Full Name</label>
-              <input
-                name="name"
-                value={form.name}
-                onChange={onChange}
-                placeholder="Enter your full name"
-                className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={onChange}
-                placeholder="Enter your email address"
-                className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700">I am a...</label>
-              <select
-                name="role"
-                value={form.role}
-                onChange={onChange}
-                className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                <option value="">Select your role</option>
-                <option>Clinician</option>
-                <option>Product Partner</option>
-                <option>EHR Partner</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700">Your Message</label>
-              <textarea
-                name="message"
-                value={form.message}
-                onChange={onChange}
-                placeholder="Tell us how we can help you..."
-                rows={5}
-                className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
+const MailIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v6a2 2 0 002 2z" />
+  </svg>
+);
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full sm:w-auto rounded-lg bg-indigo-600 text-white px-5 py-2.5 font-medium hover:bg-indigo-700 transition disabled:opacity-60"
-            >
-              {loading ? 'Sending...' : 'Send Message'}
+const BulbBadge = () => (
+  <svg className="w-5 h-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+    <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+  </svg>
+);
+
+export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    role: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      alert(`Thank you, ${form.name || "there"}! Your message has been sent.`);
+      setLoading(false);
+      setForm({ name: "", email: "", role: "", message: "" });
+    }, 1200);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Top bar */}
+      <nav className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="text-xl font-bold text-gray-800">dSkribe.ai</div>
+          <div className="flex items-center space-x-5">
+            <a href="/" className="text-gray-600 hover:text-gray-800 font-medium">
+              Back to Home
+            </a>
+            <button className="text-gray-600 hover:text-gray-800" aria-label="Share">
+              <MailIcon />
             </button>
-          </form>
+          </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Right: Contacts */}
-      <div className="space-y-6">
-        <div className="rounded-2xl bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)] p-5 sm:p-6">
-          <h3 className="text-slate-900 font-semibold text-lg">Other Ways to Reach Us</h3>
-          <p className="mt-2 text-sm text-slate-700">Team Contacts:</p>
-          <ul className="mt-2 space-y-1 text-indigo-600 text-sm">
-            <li><a href="mailto:nelanchelvan@dSkribe.ai" className="hover:underline">nelanchelvan@dSkribe.ai</a></li>
-            <li><a href="mailto:hsingh@dSkribe.ai" className="hover:underline">hsingh@dSkribe.ai</a></li>
-            <li><a href="mailto:imusunuri@dSkribe.ai" className="hover:underline">imusunuri@dSkribe.ai</a></li>
-          </ul>
-          <div className="mt-4 p-3 rounded-lg bg-indigo-50 text-slate-700 text-sm">
-            We’re currently recruiting clinicians, product testers, and EHR partners. If you’re interested, mention it in your message or reach out directly!
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">Let&apos;s Connect</h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            Have questions, feedback, or want to join our clinical network? Reach out below.
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Left card */}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Send us a message</h2>
+
+            {/* Info banner */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  <BulbBadge />
+                </div>
+                <p className="text-sm text-blue-800">
+                  Joining our waitlist? Select &apos;Join Waitlist&apos; below and tell us about your practice. We&apos;ll
+                  notify you when early access opens!
+                </p>
+              </div>
+            </div>
+
+            <form onSubmit={onSubmit} className="space-y-5">
+              {/* Full Name */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={onChange}
+                  placeholder="Enter your full name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={onChange}
+                  placeholder="Enter your email address"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                />
+              </div>
+
+              {/* Role */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">I am a...</label>
+                <select
+                  name="role"
+                  value={form.role}
+                  onChange={onChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                >
+                  <option value="">Select your role</option>
+                  <option value="clinician">Clinician</option>
+                  <option value="product-partner">Product Partner</option>
+                  <option value="ehr-partner">EHR Partner</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={onChange}
+                  rows={4}
+                  placeholder="Tell us how we can help you..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          </div>
+
+          {/* Right column */}
+          <div className="space-y-8">
+            {/* Other Ways to Reach Us */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-6">Other Ways to Reach Us</h2>
+
+              <div className="space-y-1 mb-5">
+                <p className="text-sm font-medium text-gray-700">Team Contacts:</p>
+                <a className="block text-blue-600 hover:underline break-all" href="mailto:nelanchelvan@dSkribe.ai">
+                  nelanchelvan@dSkribe.ai
+                </a>
+                <a className="block text-blue-600 hover:underline break-all" href="mailto:hsingh@dSkribe.ai">
+                  hsingh@dSkribe.ai
+                </a>
+                <a className="block text-blue-600 hover:underline break-all" href="mailto:imusunuri@dSkribe.ai">
+                  imusunuri@dSkribe.ai
+                </a>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm text-blue-800">
+                  We&apos;re currently recruiting clinicians, product testers, and EHR partners. If you&apos;re
+                  interested, mention it in your message or reach out directly!
+                </p>
+              </div>
+            </div>
+
+            {/* Where We Work From */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-6">Where We Work From</h2>
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 text-center">
+                <div className="text-blue-600 text-3xl mb-3">📍</div>
+                <p className="text-gray-700 font-medium">Remote-first – Based in California</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-2xl bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)] p-5 sm:p-6">
-          <h3 className="text-slate-900 font-semibold text-lg">Where We Work From</h3>
-          <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-            <div className="text-indigo-600 text-2xl">📍</div>
-            <p className="mt-2 text-slate-700">Remote-first – Based in California</p>
+        {/* Bottom CTA */}
+        <div className="mt-12">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 text-center text-white shadow-lg">
+            <h3 className="text-2xl font-semibold mb-4">Want to see dSkribe in action? Try it free.</h3>
+            <button
+              disabled
+              className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full font-medium cursor-not-allowed"
+            >
+              Coming Soon
+            </button>
           </div>
         </div>
       </div>
     </div>
-
-    {/* Gradient promo band */}
-    <section className="mt-10">
-      <div className="rounded-3xl px-6 py-10 text-center text-white bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 shadow-[0_8px_32px_rgba(79,70,229,0.35)]">
-        <h4 className="text-xl sm:text-2xl font-semibold">Want to see dSkribe in action? Try it free.</h4>
-        <button
-          type="button"
-          disabled
-          className="mt-4 inline-flex items-center rounded-full bg-white/30 text-white backdrop-blur px-4 py-2 text-sm font-medium cursor-not-allowed"
-        >
-          Coming Soon
-        </button>
-      </div>
-    </section>
-
-    <div className="h-10" />
-  </div>
-</div>
+  );
+}
